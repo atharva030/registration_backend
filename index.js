@@ -33,6 +33,11 @@ app.post("/registration",async(req,res)=>{
   }
 
 })
+ mongoose.connect(mongoURL,connectionParams).then(()=>{
+    console.info("connected")
+  }).catch((error)=>{
+      console.log("Error: ",error)
+  });
 app.listen(PORT || 5000, () => {
    // console.log(`Example app listening on port ${port}`);
   });
