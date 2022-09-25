@@ -1,6 +1,9 @@
 const express = require("express");
 const ContentModel = require("./Models/Content");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
 const app=express();
 const port=8000;
 const mongoURL=process.env.MONGO_URL
