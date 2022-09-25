@@ -1,14 +1,20 @@
+require('dotenv').config()
 const express = require("express");
-const ContentModel = require("./models/Content");
+const ContentModel = require("./Models/Content");
 const mongoose = require("mongoose");
+
 const app=express();
 const port=8000;
+const mongoURL=process.env.MONGO_URL
 var cors=require('cors')
-const mongoURI="mongodb+srv://atharva:Pankhuri@cluster0.3asiwc6.mongodb.net/?retryWrites=true&w=majority"
+let PORT = process.env.PORT;
+
 app.use(express.json());
-mongoose.connect(mongoURI,{
+
+const connectionParams={
     useNewUrlParser:true,
-});
+    useUnifiedTopology:true
+}
 app.use(cors())
 app.post("/registration",async(req,res)=>{
    
@@ -32,7 +38,12 @@ app.post("/registration",async(req,res)=>{
   }
 
 })
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+ mongoose.connect(mongoURL,connectionParams).then(()=>{
+    console.info("connected")
+  }).catch((error)=>{
+      console.log("Error: ",error)
+  });
+app.listen(PORT || 5000, () => {
+   // console.log(`Example app listening on port ${port}`);
   });
   
