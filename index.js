@@ -6,10 +6,13 @@ const port=8000;
 const mongoURL=process.env.MONGO_URL
 var cors=require('cors')
 let PORT = process.env.PORT;
+
 app.use(express.json());
-mongoose.connect(mongoURL,{
+
+const connectionParams={
     useNewUrlParser:true,
-});
+    useUnifiedTopology:true
+}
 app.use(cors())
 app.post("/registration",async(req,res)=>{
    
