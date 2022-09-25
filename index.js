@@ -7,7 +7,7 @@ const mongoURL=process.env.MONGO_URL
 var cors=require('cors')
 let PORT = process.env.PORT;
 app.use(express.json());
-mongoose.connect(mongoURI,{
+mongoose.connect(mongoURL,{
     useNewUrlParser:true,
 });
 app.use(cors())
