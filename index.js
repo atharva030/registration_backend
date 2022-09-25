@@ -1,5 +1,5 @@
 const express = require("express");
-const ContentModel = require("./models/Content");
+const ContentModel = require("./Models/Content");
 const mongoose = require("mongoose");
 const app=express();
 const port=8000;
