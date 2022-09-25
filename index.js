@@ -38,6 +38,9 @@ app.post("/registration",async(req,res)=>{
   }
 
 })
+ app.get("/", (req, res) => {
+    res.status(200).send("Hello server is running").end();
+  });
  mongoose.connect(mongoURL,connectionParams).then(()=>{
     console.info("connected")
   }).catch((error)=>{
