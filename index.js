@@ -3,8 +3,9 @@ const ContentModel = require("./models/Content");
 const mongoose = require("mongoose");
 const app=express();
 const port=8000;
+const mongoURL=process.env.MONGO_URL
 var cors=require('cors')
-const mongoURI="mongodb+srv://atharva:Pankhuri@cluster0.3asiwc6.mongodb.net/?retryWrites=true&w=majority"
+let PORT = process.env.PORT;
 app.use(express.json());
 mongoose.connect(mongoURI,{
     useNewUrlParser:true,
@@ -32,7 +33,7 @@ app.post("/registration",async(req,res)=>{
   }
 
 })
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(PORT || 5000, () => {
+   // console.log(`Example app listening on port ${port}`);
   });
   
