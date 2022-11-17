@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const ContentSchema = new mongoose.Schema({
+const registerSchema = new mongoose.Schema({
   first_name: {
     type: String,
     require: true,
@@ -18,14 +18,6 @@ const ContentSchema = new mongoose.Schema({
     require:true,
     unique:true
   },
-  org_name: {
-    type: String,
-    require: true,
-  },
-  org_address: {
-    type: String,
-    require: true,
-  },
   password: {
     type: String,
     require: true,
@@ -34,6 +26,6 @@ const ContentSchema = new mongoose.Schema({
   
 });
 
-const Content=mongoose.model("Content", ContentSchema); 
+const registerUser=mongoose.model("Register", registerSchema); 
 
-module.exports = Content
+module.exports = registerUser
