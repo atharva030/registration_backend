@@ -74,11 +74,6 @@ mongoose
  app.get("/", (req, res) => {
     res.status(200).send("Hello server is running").end();
   });
- mongoose.connect(mongoURI,connectionParams).then(()=>{
-    console.info("connected")
-  }).catch((error)=>{
-      console.log("Error: ",error)
-  });
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
