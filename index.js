@@ -10,15 +10,27 @@ const app = express();
 var cors = require("cors");
 
 const port = 5000;
-const connectionParams = {
+const connectionParams = { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 app.use(cors());
 app.use(express.json());
+async function sendMailer(email) {
+  console.log("clicked")
+  receive(otpCode);
+
+  const result = await transporter.sendMail({
+    from: "rnxg@sggs.ac.in",
+    to: email,
+    subject: "RNXG- Email Verification",
+    text: `Your OTP for Verification is : ${otpCode}`,
+  });
+  console.log(JSON.stringify(result, null, 4));
+}
 
 app.post("/registration", async (req, res) => {
-  send()
+  sendMailer(req.body.email)
   const data = new RegisterModel({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
@@ -36,9 +48,9 @@ app.post("/registration", async (req, res) => {
   }
 });
 
+
 console.log(otpCode)
 app.post("/receiveotp", async (req, res) => {
-  // send()
   const otpdata = req.body.receiveOtp;
   try {
     if (otpCode == otpdata && bool) {
@@ -58,6 +70,14 @@ mongoose
   })
   .catch((error) => {
     console.log("Error: ", error);
+})
+ app.get("/", (req, res) => {
+    res.status(200).send("Hello server is running").end();
+  });
+ mongoose.connect(mongoURI,connectionParams).then(()=>{
+    console.info("connected")
+  }).catch((error)=>{
+      console.log("Error: ",error)
   });
 
 const transporter = nodeMailer.createTransport({
@@ -72,17 +92,8 @@ const transporter = nodeMailer.createTransport({
   },
 });
 
-async function send(email) {
-  receive(otpCode);
 
-  const result = await transporter.sendMail({
-    from: "rnxg@sggs.ac.in",
-    to: email,
-    subject: "RNXG- Email Verification",
-    text: `Your OTP for Verification is : ${otpCode}`,
-  });
-  console.log(JSON.stringify(result, null, 4));
-}
+
 
 async function receive(otp) {
   let otpReceive = 6569;
